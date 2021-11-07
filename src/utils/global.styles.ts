@@ -28,12 +28,12 @@ export default createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
-    position: fixed;
+    /* position: fixed; */
     width: 100%;
-  }
+    font-family: 'DM Sans', sans-serif;  }
 
   :root {
-      /* font-size: ${px2vw(24)};
+      font-size: ${px2vw(24)};
 
       @media  (min-width: 768px) {
         font-size: ${px2vw(18)};
@@ -41,6 +41,6 @@ export default createGlobalStyle`
 
       @media (min-width: 1024px) {
         font-size: ${px2vw(16)};
-      } */
+      }
     }
 `;

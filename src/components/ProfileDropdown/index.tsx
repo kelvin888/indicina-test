@@ -1,20 +1,22 @@
-import { FC } from "react";
 import styled from "styled-components";
 
-const Container = styled.div`
-  width: 150px;
+export const DropdownContainer = styled.div`
+  width: 185px;
   height: 50px;
   position: relative;
   margin-left: auto;
+  display: flex;
 `;
 
-const Trigger = styled.div`
-  max-width: 150px;
+export const DropdownTrigger = styled.div`
+  width: 100%;
   display: flex;
   min-height: 50px;
+  justify-content: space-between;
+  align-items: center;
 `;
 
-const Content = styled.div`
+export const DropdownContent = styled.div<{ show: boolean }>`
   min-height: 63px;
   position: absolute;
   width: 180px;
@@ -25,6 +27,7 @@ const Content = styled.div`
   box-sizing: border-box;
   box-shadow: 0px 6px 58px rgba(196, 203, 214, 0.2);
   border-radius: 3px;
+  display: ${(props) => (props.show ? "block" : "none")};
 
   &::before {
     content: "";
@@ -32,18 +35,8 @@ const Content = styled.div`
     height: 12px;
     border: 0.6em inset transparent;
     position: absolute;
-    right: 10px;
-    top: -47px;
+    right: 3px;
+    top: -46px;
     border-bottom: 25px solid #ffffff;
   }
 `;
-
-export const DropdownContainer: FC = ({ children }) => (
-  <Container>{children}</Container>
-);
-export const DropdownTrigger: FC = ({ children }) => (
-  <Trigger>{children}</Trigger>
-);
-export const DropdownContent: FC = ({ children }) => (
-  <Content>{children}</Content>
-);

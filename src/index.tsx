@@ -5,13 +5,21 @@ import reportWebVitals from "./reportWebVitals";
 import GlobalCSS from "./utils/global.styles";
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "./utils/theme";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { GlobalCtxProvider } from "./context/GlobalContext";
+
+const queryClient = new QueryClient();
 
 ReactDOM.render(
   <React.StrictMode>
     <GlobalCSS />
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
+    <GlobalCtxProvider>
+      <ThemeProvider theme={theme}>
+        <QueryClientProvider client={queryClient}>
+          <App />
+        </QueryClientProvider>
+      </ThemeProvider>
+    </GlobalCtxProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
@@ -20,26 +28,3 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-
-// const data = await axios.post(API_URL, {
-//   query: `mutation updateUserCity($id: Int!, $city: String!) {
-//     updateUserCity(userID: $id, city: $city){
-//       id
-//       name
-//       age
-//       city
-//       knowledge{
-//         language
-//         frameworks
-//       }
-//     }
-//   }`,
-//   variables: {
-//     id: 2,
-//     city: 'Test'
-//   }
-// }, {
-//     headers: {
-//       'Content-Type': 'application/json'
-//     }
-//   })

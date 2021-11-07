@@ -6,7 +6,7 @@ export const NotFound = () => {
       display="flex"
       alignItems="center"
       justifyContent="center"
-      minHeight="100vh"
+      // minHeight="100vh"
     >
       the content you are looking for does not exist
     </Box>
