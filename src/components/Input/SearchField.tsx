@@ -7,4 +7,5 @@ export const SearchField = styled.input<{ width?: string; height?: string }>`
   border-radius: 100px;
   width: ${(props) => `${props.width || "100%"}`};
   height: ${(props) => `${props.height || "50px"}`};
+  padding: 0 1rem;
 `;

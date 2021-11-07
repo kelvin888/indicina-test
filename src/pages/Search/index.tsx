@@ -7,13 +7,14 @@ import { Image } from "../../components/Image";
 import GitLogo from "../../assets/img/git-logo.png";
 import { Container } from "../../components/Container";
 import React from "react";
+import { useGlobalContext } from "../../context/GlobalContext";
+import { actionTypes } from "../../context/actionTypes";
 
 export const Button = styled.button`
   width: 179px;
   height: 40px;
   background: #5c5c5c;
   border-radius: 5px;
-  font-family: "DM Sans", sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
@@ -23,16 +24,29 @@ export const Button = styled.button`
 
 export const Search = () => {
   const navigate = useNavigate();
+  const { dispatch, state } = useGlobalContext();
 
   const handleSearch = () => {
-    navigate("/search-results");
+    if (state.searchKeyword) {
+      navigate("/search-results");
+    }
   };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({
+      type: actionTypes.SET_QUERY,
+      payload: {
+        searchKeyword: e.target.value,
+      },
+    });
+  };
+
   return (
     <React.Fragment>
       <Header />
 
       <Container>
-        <Box minHeight="100vh">
+        <Box>
           <Box
             height="250px"
             display="flex"
@@ -45,14 +59,21 @@ export const Search = () => {
             display="flex"
             flexDirection="column"
             alignItems="center"
-            minHeight="100vh"
             sx={{
               display: "grid",
               gridGap: 4,
             }}
             padding="20px"
           >
-            <SearchField width="580px" />
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSearch();
+              }}
+            >
+              <SearchField width="580px" onChange={handleChange} />
+            </form>
+            <pre>{JSON.stringify(state, null, 2)}</pre>
             <Button onClick={handleSearch}>Search Github</Button>
           </Box>
         </Box>
